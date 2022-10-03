@@ -1,81 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
-[RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(PlayerInput))]
 
 public class TwinStickMovement : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 5f;
-    [SerializeField] private float gravityValue = -9.81f;
+    public float speed = 10.0f; // Speed variable
+    public Rigidbody rb; // Set the variable 'rb' as Rigibody
+    public Vector3 movement;
 
-    private CharacterController controller;
 
-    private Vector2 movement;
-    private Vector2 aim;
 
-    private Vector3 playerVelocity;
-
-    private PlayerControls playerControls;
-    private PlayerInput playerInput;
-
-    private void Awake()
+    // 'Start' Method run once at start for initialisation purposes
+    void Start()
     {
-        controller = GetComponent<CharacterController>();
-        playerControls = new PlayerControls();
-        playerInput = GetComponent<PlayerInput>();
-    }
-    
-    private void OnEnable()
-    {
-        playerControls.Enable();
+        rb = this.GetComponent<Rigidbody>();
     }
 
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
-    // Update is called once per frame
+
+
+    // 'Update' Method is called once per frame
     void Update()
     {
-        HandleInput();
-        HandleMovement();
-        HandleRotation();
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float midPoint = (transform.position - Camera.main.transform.position).magnitude * 0.5f;
 
+        transform.LookAt(mouseRay.origin + mouseRay.direction * midPoint);
+
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));
     }
 
-    void HandleInput()
+    // 'FixedUpdate' Method is used for Physics movements
+    void FixedUpdate()
     {
-        movement = playerControls.Controls.Movement.ReadValue<Vector2>();
-        aim = playerControls.Controls.Aim.ReadValue<Vector2>();
+        moveCharacter(movement);
     }
-
-
-    void HandleMovement()
+     void moveCharacter(Vector3 direction)
     {
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
+        rb.AddForce(direction * speed);
     }
 
-    void HandleRotation()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(aim);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayDistance;
-
-        if (groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 point = ray.GetPoint(rayDistance);
-            LookAt(point);
-        }
-    }
-
-    private void LookAt(Vector3 lookPoint)
-    {
-        Vector3 heightCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
-        transform.LookAt(heightCorrectedPoint);
-    }
 }
