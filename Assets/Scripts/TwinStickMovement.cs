@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TwinStickMovement : MonoBehaviour
 {
     public float speed = 10.0f; // Speed variable
-    public Rigidbody rb; // Set the variable 'rb' as Rigibody
+    public Rigidbody rigidBody; // Set the variable 'rb' as Rigibody
     public Vector3 movement;
-
+    public TextMeshProUGUI Anchor;
 
 
     // 'Start' Method run once at start for initialisation purposes
     void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
+        rigidBody = this.GetComponent<Rigidbody>();
     }
 
 
@@ -21,12 +22,12 @@ public class TwinStickMovement : MonoBehaviour
     // 'Update' Method is called once per frame
     void Update()
     {
-        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float midPoint = (transform.position - Camera.main.transform.position).magnitude * 0.5f;
+        
 
-        transform.LookAt(mouseRay.origin + mouseRay.direction * midPoint);
+        transform.LookAt(new Vector3((Anchor.transform.position.x - Input.mousePosition.x),1.16066f, (Anchor.transform.position.y - Input.mousePosition.y)));
+       
 
-        movement = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));    
     }
 
     // 'FixedUpdate' Method is used for Physics movements
@@ -34,9 +35,9 @@ public class TwinStickMovement : MonoBehaviour
     {
         moveCharacter(movement);
     }
-     void moveCharacter(Vector3 direction)
+    void moveCharacter(Vector3 direction)
     {
-        rb.AddForce(direction * speed);
+        rigidBody.AddForce(direction * speed);
     }
 
 }
