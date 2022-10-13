@@ -5,16 +5,20 @@ using TMPro;
 
 public class TwinStickMovement : MonoBehaviour
 {
-    public float speed = 10.0f; // Speed variable
+    public float speed; // Speed variable
     public Rigidbody rigidBody; // Set the variable 'rb' as Rigibody
     public Vector3 movement;
     public TextMeshProUGUI Anchor;
 
+    public float dash;
+    public float dashCoolDown;
+    public float dashCount;
 
-    // 'Start' Method run once at start for initialisation purposes
     void Start()
     {
         rigidBody = this.GetComponent<Rigidbody>();
+
+        
     }
 
 
@@ -22,12 +26,25 @@ public class TwinStickMovement : MonoBehaviour
     // 'Update' Method is called once per frame
     void Update()
     {
-        
+        HandleShootInput();
 
-        transform.LookAt(new Vector3((Anchor.transform.position.x - Input.mousePosition.x),1.16066f, (Anchor.transform.position.y - Input.mousePosition.y)));
+        transform.LookAt(new Vector3((Anchor.transform.position.x - Input.mousePosition.x),0.0f, (Anchor.transform.position.y - Input.mousePosition.y)));
        
 
-        movement = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));    
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (dashCoolDown <= 0.0f)
+            {
+                rigidBody.AddForce(movement * dash, ForceMode.Impulse);
+                dashCoolDown = dashCount;
+            }
+            
+        }
+        if (dashCoolDown >= 0.0f)
+        {
+            dashCoolDown -= Time.deltaTime;
+        }
     }
 
     // 'FixedUpdate' Method is used for Physics movements
@@ -40,4 +57,12 @@ public class TwinStickMovement : MonoBehaviour
         rigidBody.AddForce(direction * speed);
     }
 
+    void HandleShootInput()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            PlayerShoot.Instance.Shoot();
+        }
+
+    }
 }
