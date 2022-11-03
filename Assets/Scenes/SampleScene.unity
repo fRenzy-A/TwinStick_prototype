@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 775945428}
   projectilePrefab: {fileID: 3688505459157238684, guid: 7ac9ddf834bab194eb57a4880f93979c, type: 3}
-  firingSpeed: 0.2
+  firingSpeed: 1
 --- !u!23 &2055850181
 MeshRenderer:
   m_ObjectHideFlags: 0

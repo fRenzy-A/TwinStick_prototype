@@ -8,6 +8,7 @@ public class TwinStickMovement : MonoBehaviour
     public float speed; // Speed variable
     public Rigidbody rigidBody; // Set the variable 'rb' as Rigibody
     public Vector3 movement;
+    //public float dashMax;
     public TextMeshProUGUI Anchor;
 
     public float dash;
