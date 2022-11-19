@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectiles : MonoBehaviour
@@ -35,4 +36,5 @@ public class Projectiles : MonoBehaviour
             transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
         }
     }
+
 }

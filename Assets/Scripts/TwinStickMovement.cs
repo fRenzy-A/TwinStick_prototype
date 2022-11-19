@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class TwinStickMovement : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class TwinStickMovement : MonoBehaviour
 
     public float dash;
     public float dashCoolDown;
+    public float dashCoolDownInitial;
     public float dashCount;
+    public float iFrame;
+    public float iFrameInitial;
 
     void Start()
     {
@@ -35,14 +39,31 @@ public class TwinStickMovement : MonoBehaviour
         movement = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (dashCoolDown <= 0.0f)
-            {
-                rigidBody.AddForce(movement * dash, ForceMode.Impulse);
-                dashCoolDown = dashCount;
-            }
             
+            if (dashCoolDown < 0.0f)
+            {
+                rigidBody.AddForce(movement * dash, ForceMode.VelocityChange);
+                dashCoolDown = dashCoolDownInitial;
+            }
+            if (iFrame < 0.1f)
+            {
+                gameObject.tag = "Player";
+                iFrame = iFrameInitial;
+            }         
+            if (iFrame > 0.0f)
+            {
+                gameObject.tag = "Invincible";
+            }
         }
-        if (dashCoolDown >= 0.0f)
+        if (iFrame < 0.1f)
+        {
+            gameObject.tag = "Player";
+        }
+        if (iFrame > 0.0f)
+        {
+            iFrame -= Time.deltaTime;
+        }
+        if (dashCoolDown > 0.0f)
         {
             dashCoolDown -= Time.deltaTime;
         }
