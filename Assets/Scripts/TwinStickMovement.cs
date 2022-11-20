@@ -47,7 +47,6 @@ public class TwinStickMovement : MonoBehaviour
             }
             if (iFrame < 0.1f)
             {
-                gameObject.tag = "Player";
                 iFrame = iFrameInitial;
             }         
             if (iFrame > 0.0f)
