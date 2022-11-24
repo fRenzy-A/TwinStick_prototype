@@ -4120,7 +4120,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15674
+  m_Name: pb_Mesh24904
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16371,9 +16371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  rigidBody: {fileID: 0}
-  movement: {x: 0, y: 0, z: 0}
+  rigidBody: {fileID: 1804854482}
   Anchor: {fileID: 395467382}
+  movement: {x: 0, y: 0, z: 0}
   dash: 25
   dashCoolDown: 3
   dashCoolDownInitial: 1
