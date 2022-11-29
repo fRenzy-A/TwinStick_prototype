@@ -11,18 +11,9 @@ public class Finish : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameObject.FindGameObjectWithTag("Finish").SetActive(true);
+            GameObject.Find("Finish (TMP)").SetActive(true);
         }
 ;
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
