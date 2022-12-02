@@ -10,7 +10,9 @@ public class TwinStickMovement : MonoBehaviour
     public Rigidbody rigidBody; // Set the variable 'rb' as Rigibody
     public Vector3 movement;
     //public float dashMax;
-   
+    public Material material1;
+    public Material material2;
+    public GameObject Object;
     public float dash;
     public float dashCoolDown;
     public float dashCoolDownInitial;
@@ -22,6 +24,7 @@ public class TwinStickMovement : MonoBehaviour
     {
         rigidBody = this.GetComponent<Rigidbody>();
         m_camera = Camera.main;
+        
     }
 
 
@@ -43,6 +46,7 @@ public class TwinStickMovement : MonoBehaviour
             {
                 rigidBody.AddForce(movement * dash, ForceMode.VelocityChange);
                 dashCoolDown = dashCoolDownInitial;
+                Object.GetComponent<MeshRenderer>().material = material1;
             }
             if (iFrame < 0.1f)
             {
@@ -56,6 +60,7 @@ public class TwinStickMovement : MonoBehaviour
         if (iFrame < 0.1f)
         {
             gameObject.tag = "Player";
+            Object.GetComponent<MeshRenderer>().material = material2;
         }
         if (iFrame > 0.0f)
         {
