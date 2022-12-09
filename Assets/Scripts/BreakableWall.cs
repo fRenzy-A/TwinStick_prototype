@@ -8,17 +8,11 @@ public class BreakableWall : MonoBehaviour
     private bool Hit;
     private void OnTriggerEnter(Collider other)
     {
-        while (HitPoints > 0)
+        if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Enemy Bullet")
         {
-            if (other.gameObject.tag == "Bullet")
-            {
-                HitPoints = HitPoints - 1;
-            }
-            if (HitPoints == 0)
-            {
-                Destroy(this.gameObject);
-                Destroy(other.gameObject);
-            }
+            HitPoints = HitPoints - 1;
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
         }
 
     }

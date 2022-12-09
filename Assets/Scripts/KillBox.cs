@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class KillBox : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform respawn_point;
+    [SerializeField] public Transform player;
+    [SerializeField] public Transform respawn_point;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

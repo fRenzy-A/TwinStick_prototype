@@ -8,15 +8,16 @@ TagManager:
   - Bullet
   - Invincible
   - Center
+  - Enemy Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Floor
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Wall
   - 
   - 
   - 

@@ -90,4 +90,15 @@ public class TwinStickMovement : MonoBehaviour
         }
 
     }
+
+    [SerializeField] public Transform player;
+    [SerializeField] public Transform respawn_point;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy Bullet"))
+        {
+            player.transform.position = respawn_point.transform.position;
+        }
+
+    }
 }
