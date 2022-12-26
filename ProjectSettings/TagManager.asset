@@ -9,6 +9,7 @@ TagManager:
   - Invincible
   - Center
   - Enemy Bullet
+  - Level Wall
   layers:
   - Default
   - TransparentFX

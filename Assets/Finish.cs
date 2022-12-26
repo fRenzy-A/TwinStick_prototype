@@ -6,12 +6,20 @@ using UnityEngine;
 
 public class Finish : MonoBehaviour
 {
- 
-    private void OnTriggerEnter(Collider other)
+    public GameObject finishTextObject;
+    public GameObject instructionTextObject;
+
+    private void Start()
     {
+        instructionTextObject.SetActive(true);
+        finishTextObject.SetActive(false);
+    }
+    private void OnTriggerEnter(Collider other)
+    {       
         if (other.gameObject.CompareTag("Player"))
         {
-            GameObject.Find("Finish (TMP)").SetActive(true);
+            instructionTextObject.SetActive(false);
+            finishTextObject.SetActive(true);
         }
 ;
     }
