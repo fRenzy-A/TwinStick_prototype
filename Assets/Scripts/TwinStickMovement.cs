@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class TwinStickMovement : MonoBehaviour
 {
     public float speed; // Speed variable
-    public float slowdown;
     public Rigidbody rigidBody; // Set the variable 'rb' as Rigibody
     public Vector3 movement;
     //public float dashMax;
@@ -84,14 +83,7 @@ public class TwinStickMovement : MonoBehaviour
     void moveCharacter(Vector3 direction)
     {
         rigidBody.AddForce(direction * speed);
-        if (Input.GetKey(KeyCode.Space))
-        {
-            speed = 3.0f;
-        }
-        else
-        {
-            speed = 30.0f;
-        }
+        
     }
 
     void HandleShootInput()

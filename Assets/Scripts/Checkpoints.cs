@@ -24,6 +24,7 @@ public class Checkpoints : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             respawnpoint.transform.position = checkpointposition.transform.position;
+
         }
     }
 }
