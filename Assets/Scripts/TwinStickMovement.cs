@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class TwinStickMovement : MonoBehaviour
 {
     public float speed; // Speed variable
+    public float slowdown;
     public Rigidbody rigidBody; // Set the variable 'rb' as Rigibody
     public Vector3 movement;
     //public float dashMax;
@@ -32,6 +33,7 @@ public class TwinStickMovement : MonoBehaviour
     // 'Update' Method is called once per frame
     void Update()
     {
+        
         HandleShootInput();
 
         var lookAtPos = Input.mousePosition;
@@ -70,6 +72,8 @@ public class TwinStickMovement : MonoBehaviour
         {
             dashCoolDown -= Time.deltaTime;
         }
+        
+        
     }
 
     // 'FixedUpdate' Method is used for Physics movements
@@ -80,6 +84,14 @@ public class TwinStickMovement : MonoBehaviour
     void moveCharacter(Vector3 direction)
     {
         rigidBody.AddForce(direction * speed);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            speed = 3.0f;
+        }
+        else
+        {
+            speed = 30.0f;
+        }
     }
 
     void HandleShootInput()
@@ -97,7 +109,10 @@ public class TwinStickMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy Bullet"))
         {
-            player.transform.position = respawn_point.transform.position;
+            if (gameObject.tag == "Player")
+            {
+                player.transform.position = respawn_point.transform.position;
+            }
         }
 
     }

@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4271359371968024496}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,6 +242,8 @@ MonoBehaviour:
   dashCount: 1
   iFrame: 0.5
   iFrameInitial: 0.5
+  player: {fileID: 0}
+  respawn_point: {fileID: 0}
 --- !u!54 &4271359371968024506
 Rigidbody:
   m_ObjectHideFlags: 0
